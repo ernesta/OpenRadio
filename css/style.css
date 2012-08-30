@@ -1,0 +1,90 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	color: #EEE;
+	text-align: center;
+	background: url("../img/bcg.png") repeat;
+}
+
+.navbar {
+	margin-bottom: 0;
+}
+
+a, .navbar a.brand {
+	color: #00DFFC;
+}
+
+.navbar .nav .set a {
+	color: #FF9B40;
+}
+
+.navbar .nav .set a:hover {
+	color: #FF7A00;
+}
+
+#foot {
+	position: absolute;
+	bottom: 5px;
+	right: 10px;
+	margin-left: 10px;
+	padding: 10px;
+	border-radius: 3px;
+	background-color: rgba(0, 0, 0, 0.5);
+	font-size: 11px;
+}
+
+#foot a {
+	color: #00B4CC;
+}
+
+#player {
+	width: 200px;
+	margin: 11% auto 0 auto;
+}
+
+#player img {
+	width: 200px;
+	border-radius: 10%;
+}
+
+#player a {
+	display: block;
+}
+
+#tags {
+	margin-top: 5px;
+	text-align: left;
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+
+.label {
+	margin-right: 5px;
+	margin-bottom: 5px;
+	font-weight: normal;
+	background: none;
+	color: #87899B;
+	font-size: 10px;
+}
+
+#song {
+	text-transform: uppercase;
+}
+
+#song, #artist {
+	font-family: Verdana;
+	font-size: 11px;
+	color: #DFDFDF;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px #000;
+}
+
+@media (max-width: 767px) {
+	body {
+		padding-right: 0px;
+		padding-left: 0px;
+	}
+}
