@@ -14,18 +14,16 @@
 		
 		
 		public static function sendRequest($params, $method = "GET") {
+			global $context;
+			
 			$params["api_sig"] = self::generateSecret($params);
 			$query = http_build_query($params, "", "&");
 			
-			$context = stream_context_create(array(
-				"http" => array(
-					"timeout" => 10,
-					"method" => $method)
-				)
-			);
 			
 			$content = file_get_contents(SCROBBLE_URL . "?" . $query, false, $context);
-			return simplexml_load_string($content);
+			$xml = simplexml_load_string($content);
+			
+			return $xml;
 		}
 		
 		

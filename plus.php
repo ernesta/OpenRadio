@@ -13,7 +13,13 @@
 	define("SLEEP_TIME", 5);
 	
 	
-	$previousSong = null;
+	$previousSong = NULL;
+	
+	$context = stream_context_create(array(
+		"http" => array(
+			"timeout" => 5)
+		)
+	);
 	
 	$gearman = new GearmanClient();
 	$gearman->addServer();
@@ -21,7 +27,6 @@
 	while (true) {
 		sleep(SLEEP_TIME);
 		
-		echo("<pre>");
 		$xml = getXML(RADIO_DATA_URL);
 		
 		if (!$xml) {
@@ -29,7 +34,6 @@
 		}
 		
 		$song = fetchSong($xml);
-		print_r($song);
 		
 		if (!$song) {
 			continue;
@@ -115,13 +119,9 @@
 	
 	
 	function getXML($xmlURL) {
-		$context = stream_context_create(array(
-			"http" => array(
-				"timeout" => 5)
-			)
-		);
+		global $context;
 		
-		$content = file_get_contents($xmlURL, false, $context);
+		$content = file_get_contents($xmlURL, false, $context);		
 		$xml = simplexml_load_string($content);
 		
 		return $xml;
