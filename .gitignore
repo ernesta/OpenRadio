@@ -1,2 +1,10 @@
-.DS_Store
+# Secret Stuff
 constants.php
+
+# Editor Files
+*.esproj
+
+# OS Files
+.DS_Store
+.Trashes
+Thumbs.db
