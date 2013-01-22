@@ -1,5 +1,5 @@
 # Secret Stuff
-constants.php
+secrets.php
 
 # Editor Files
 *.esproj
