@@ -5,21 +5,15 @@
 	require("classes/Tag.php");
 	require("classes/Last.php");
 	
-	//Constants: USERNAME, API_KEY, API_SECRET, SESSION_KEY, SCROBBLE_URL
+	//Secrets: USERNAME, API_KEY, API_SECRET, SESSION_KEY.
+	require("secrets.php");
 	require("constants.php");
 	
 	
-	define("RADIO_DATA_URL", "http://pliusas.fm/xml/onair.xml");
-	define("SLEEP_TIME", 5);
 	
 	
 	$previousSong = NULL;
 	
-	$context = stream_context_create(array(
-		"http" => array(
-			"timeout" => 5)
-		)
-	);
 	
 	$gearman = new GearmanClient();
 	$gearman->addServer();
@@ -119,9 +113,9 @@
 	
 	
 	function getXML($xmlURL) {
-		global $context;
+		global $contextGET;
 		
-		$content = file_get_contents($xmlURL, false, $context);		
+		$content = file_get_contents($xmlURL, false, $contextGET);
 		$xml = simplexml_load_string($content);
 		
 		return $xml;
