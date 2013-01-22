@@ -10,25 +10,25 @@
 	require("constants.php");
 	
 	
-	
-	
-	$previousSong = NULL;
-	
-	
+	// Gearman.
 	$gearman = new GearmanClient();
 	$gearman->addServer();
 	
+	
+	// Previous song for tracking if a new song has started.
+	$previousSong = NULL;
+	
+	
+	// Looping indefinitely to fetch the currently playing song.
 	while (true) {
 		sleep(SLEEP_TIME);
 		
 		$xml = getXML(RADIO_DATA_URL);
-		
 		if (!$xml) {
 			continue;
 		}
 		
 		$song = fetchSong($xml);
-		
 		if (!$song) {
 			continue;
 		}
@@ -42,6 +42,7 @@
 	}
 	
 	
+	// Use data from the radio and Last.fm to create a valid Song object.
 	function fetchSong($xml) {
 		$params = array(
 			"method" => "track.getInfo",
@@ -112,6 +113,7 @@
 	}
 	
 	
+	// Fetch an XML file.
 	function getXML($xmlURL) {
 		global $contextGET;
 		
@@ -122,12 +124,14 @@
 	}
 	
 	
+	// Save a Song object to a file (accessed by scripts.js).
 	function saveJSON($song) {
 		$json = json_encode($song);
 		file_put_contents("song.json", $json);
 	}
 	
 	
+	// Add a serialized Song object to a scrobbling queue.
 	function scrobble($song) {
 		global $gearman;
 		
