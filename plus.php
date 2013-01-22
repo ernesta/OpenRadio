@@ -44,10 +44,32 @@
 	
 	// Use data from the radio and Last.fm to create a valid Song object.
 	function fetchSong($xml) {
+		$lfm = getLastFMData((string)$xml->artist, (string)$xml->title);
+		
+		$artistID = (string)$lfm->track->artist->mbid;
+		if ($artistID === "") {
+			return NULL;
+		}
+		
+		$song = createNewSong($xml, $lfm);
+		$artist = createNewArtist($lfm);
+		$album = createNewAlbum($lfm);
+		$tags = createNewTags($lfm);
+		
+		$song->artist = $artist;
+		$song->album = $album;
+		$song->tags = $tags;
+		
+		return $song;
+	}
+	
+	
+	// Fetch additional track information from Last.fm.
+	function getLastFMData($artist, $title) {
 		$params = array(
 			"method" => "track.getInfo",
-			"artist" => (string)$xml->artist,
-			"track" => (string)$xml->title,
+			"artist" => $artist,
+			"track" => $title,
 			"autocorrect" => "1",
 			"username" => USERNAME
 		);
@@ -55,44 +77,58 @@
 		$params = Last::prepareRequest($params);
 		$lfm = Last::sendRequest($params, "GET");
 		
-		$artistID = (string)$lfm->track->artist->mbid;
-		
-		if ($artistID === "") {
-			return null;
-		}
-		
-		//New song
+		return $lfm;
+	}
+	
+	
+	// Parse radio and Last.fm responses to populate a Song object.
+	function createNewSong($xml, $lfm) {
 		$song = new Song();
 		
-		//All the song attributes
 		$song->ID = (string)$xml->titleid;
 		$song->title = (string)$lfm->track->name;
-		$song->start = substr((string)$xml->start, 0, 10);
+		$song->start = (int)substr((string)$xml->start, 0, 10);
 		$song->URL = (string)$lfm->track->url;
 		$song->listeners = (string)$lfm->track->listeners;
-		$song->plays = (string)$lfm->track->playcount;
-		$song->userplays = (string)$lfm->track->userplaycount;
+		$song->plays = (int)$lfm->track->playcount;
+		$song->userplays = (int)$lfm->track->userplaycount;
 		
-		//Artist
+		return $song;
+	}
+	
+	
+	// Parse Last.fm response to populate an Artist object.
+	function createNewArtist($lfm) {
 		$artist = new Artist();
-		$artist->mbID = $artistID;
+		
+		$artist->mbID = (string)$lfm->track->artist->mbid;
 		$artist->name = (string)$lfm->track->artist->name;
 		$artist->URL = (string)$lfm->track->artist->url;
 		
-		//Album
+		return $artist;
+	}
+	
+	
+	// Parse Last.fm response to populate an Album object.
+	function createNewAlbum($lfm) {
 		$album = new Album();
+		
 		$album->name = (string)$lfm->track->album->title;
 		$album->URL = (string)$lfm->track->album->url;
 		
 		$thumbnail = (string)$lfm->track->album->image[2];
-		
 		if ((strpos($thumbnail, "noimage")) || ($thumbnail == "")) {
 			$album->thumbnail = "img/fire.png";
 		} else {
 			$album->thumbnail = $thumbnail;
 		}
 		
-		//Tags
+		return $album;
+	}
+	
+	
+	// Parse Last.fm response to populate an array of Tags.
+	function createNewTags($lfm) {
 		$tags = array();
 		
 		foreach ($lfm->track->toptags->tag as $entry) {
@@ -104,12 +140,7 @@
 			$tags[] = $tag;
 		}
 		
-		//Finalizing song
-		$song->artist = $artist;
-		$song->album = $album;
-		$song->tags = $tags;
-		
-		return $song;
+		return $tags;
 	}
 	
 	
