@@ -3,10 +3,12 @@
 	require("classes/Song.php");
 	require("classes/Last.php");
 	
-	//Constants: USERNAME, API_KEY, API_SECRET, SESSION_KEY, SCROBBLE_URL
+	//Secrets: USERNAME, API_KEY, API_SECRET, SESSION_KEY.
+	require("secrets.php");
 	require("constants.php");
 	
 	
+	// Gearman.
 	$worker = new GearmanWorker();
 	
 	$worker->addServer();
@@ -15,10 +17,11 @@
 	while ($worker->work()) {}
 	
 	
+	// Use Last.fm to scrobble tracks.
 	function process($job) {
 		$song = unserialize($job->workload());
 		
-		//Scrobble
+		//Scrobble the track.
 		$params = array(
 			"method" => "track.scrobble",
 			"artist" => $song->artist->name,
@@ -29,7 +32,7 @@
 		$params = Last::prepareRequest($params);
 		Last::sendRequest($params, "POST");
 		
-		//Now playing
+		//Set the track as now playing.
 		$params = array(
 			"method" => "track.updateNowPlaying",
 			"artist" => $song->artist->name,
@@ -37,5 +40,5 @@
 		);
 		
 		$params = Last::prepareRequest($params);
-		Last:: sendRequest($params, "POST");
+		Last::sendRequest($params, "POST");
 	}
