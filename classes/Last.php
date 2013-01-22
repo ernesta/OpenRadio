@@ -17,7 +17,13 @@
 		
 		// Sends a request using context for either a GET or a POST method.
 		public static function sendRequest($params, $method = "GET") {
-			global $context;
+			if ($method === "GET") {
+				global $contextGET;
+				$context = $contextGET;
+			} else {
+				global $contextPOST;
+				$context = $contextPOST;
+			}
 			
 			$params["api_sig"] = self::generateSignature($params);
 			$query = http_build_query($params, "", "&");
