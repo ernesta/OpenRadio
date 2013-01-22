@@ -7,6 +7,7 @@ Open Radio tracks music listening habits of [M1+](http://pliusas.fm/), a Lithuan
 + _plus.php_ retrieves the currently playing song from M1+, fetches additional track information from Last.fm, and saves everything to a JSON file.
 + _scrobbler.php_ submits new tracks to Last.fm.
 + _classes_ defines several simple data structures (Album, Artist, Song, and Tag); _Last.php_ is used for preparing and sending requests to Last.fm.
++ _constants.php_ is used for storing global constants, while _secrets.php_ contains Last.fm API_KEY, API_SECRET, and SESSION_KEY.
 
 **Frontend**
 
