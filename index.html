@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Open-radio by ernesta</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Open-radio</h1>
+        <p>Open Radio tracks music listening habits of M1+, a Lithuanian radio station with a good taste.</p>
+
+        <p class="view"><a href="https://github.com/ernesta/open-radio">View the Project on GitHub <small>ernesta/open-radio</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/ernesta/open-radio/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ernesta/open-radio/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ernesta/open-radio">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>Open Radio tracks music listening habits of <a href="http://pliusas.fm/">M1+</a>, a Lithuanian radio station with a good taste. The <a href="http://radijas.opendata.lt/">Open Radio website</a> displays whatever is currently on air, while <a href="http://www.last.fm/user/m1plius">Last.fm</a> is used for storing historical data. Open Radio is created and maintained by <a href="http://ernes7a.lt">Ernesta Orlovaitė</a> and <a href="http://aurimas.eu">Aurimas Račas</a>.</p>
+
+<h2>
+<a name="code" class="anchor" href="#code"><span class="octicon octicon-link"></span></a>Code</h2>
+
+<p><strong>Backend</strong></p>
+
+<ul>
+<li>
+<em>plus.php</em> retrieves the currently playing song from M1+, fetches additional track information from Last.fm, and saves everything to a JSON file.</li>
+<li>
+<em>scrobbler.php</em> submits new tracks to Last.fm.</li>
+<li>
+<em>classes</em> defines several simple data structures (Album, Artist, Song, and Tag); <em>Last.php</em> is used for preparing and sending requests to Last.fm.</li>
+<li>
+<em>constants.php</em> is used for storing global constants, while <em>secrets.php</em> contains Last.fm API_KEY, API_SECRET, and SESSION_KEY.</li>
+</ul><p><strong>Frontend</strong></p>
+
+<ul>
+<li>
+<em>scripts.js</em> periodically processes the JSON file and updates the webpage.</li>
+</ul><h2>
+<a name="dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies</h2>
+
+<ul>
+<li>Scrobbling to Last.fm is asynchronously performed by <a href="http://gearman.org/">Gearman</a>.</li>
+<li>JavaScript becomes much nicer when used with <a href="http://jquery.com/">jQuery</a>.</li>
+<li>The no-hassle frontend framework of choice: <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</li>
+</ul><h2>
+<a name="authors" class="anchor" href="#authors"><span class="octicon octicon-link"></span></a>Authors</h2>
+
+<p><strong>Ernesta Orlovaitė</strong></p>
+
+<ul>
+<li><a href="http://ernes7a.lt">ernes7a.lt</a></li>
+<li><a href="http://twitter.com/ernes7a">@ernes7a</a></li>
+</ul><p><strong>Aurimas Račas</strong></p>
+
+<ul>
+<li><a href="http://aurimas.eu">aurimas.eu</a></li>
+<li><a href="http://twitter.com/Aurimas">@Aurimas</a></li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/ernesta">ernesta</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
