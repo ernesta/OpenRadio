@@ -1,5 +1,5 @@
-# [Open Radio](http://radijas.opendata.lt/)
-Open Radio tracks music listening habits of [M1+](http://pliusas.fm/), a Lithuanian radio station with a good taste. The [Open Radio website](http://radijas.opendata.lt/) displays whatever is currently on air, while [Last.fm](http://www.last.fm/user/m1plius) is used for storing historical data. Open Radio is created and maintained by [Ernesta Orlovaitė](http://ernes7a.lt) and [Aurimas Račas](http://aurimas.eu).
+# [Open Radio](http://radijas.ernes7a.lt/)
+Open Radio tracks music listening habits of [M1+](http://pliusas.fm/), a Lithuanian radio station with a good taste. The [Open Radio website](http://radijas.ernes7a.lt/) displays whatever is currently on air, while [Last.fm](http://www.last.fm/user/m1plius) is used for storing historical data. Open Radio is created and maintained by [Ernesta Orlovaitė](http://ernes7a.lt) and [Aurimas Račas](http://aurimas.eu).
 
 ##Code
 **Backend**
