@@ -33,7 +33,7 @@
 			continue;
 		}
 		
-		if ($previousSong->ID !== $song->ID) {
+		if (($previousSong != null) && ($previousSong->ID !== $song->ID)) {
 			saveJSON($song);
 			scrobble($song);
 		}
@@ -45,7 +45,9 @@
 	// Use data from the radio and Last.fm to create a valid Song object.
 	function fetchSong($xml) {
 		$lfm = getLastFMData((string)$xml->artist, (string)$xml->title);
-		
+		if ($lfm == NULL) {
+			return NULL;
+		}
 		$artistID = (string)$lfm->track->artist->mbid;
 		if ($artistID === "") {
 			return NULL;
@@ -165,7 +167,7 @@
 	// Add a serialized Song object to a scrobbling queue.
 	function scrobble($song) {
 		global $gearman;
-		
+		echo 'adding to Gearman!' . PHP_EOL;
 		$serializedSong = serialize($song);
-		$gearman->doBackground("scrobbling", $serializedSong);
+		$gearman->doBackground("scrobbling", $serializedSong, md5($serializedSong));
 	}

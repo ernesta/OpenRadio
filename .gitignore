@@ -1,3 +1,7 @@
+#Production files
+log.txt*
+song.json
+
 # Secret Stuff
 secrets.php
 
