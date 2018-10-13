@@ -27,4 +27,4 @@ Open Radio tracks music listening habits of [M1+](http://pliusas.fm/), a Lithuan
 **Aurimas Račas**
 
 + [aurimas.eu](http://aurimas.eu)
-+ [@Aurimas](http://twitter.com/Aurimas)
++ [@aurimas](http://twitter.com/aurimas)

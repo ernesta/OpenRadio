@@ -1,2 +1,14 @@
+#Production files
 log.txt*
 song.json
+
+# Secret Stuff
+secrets.php
+
+# Editor Files
+*.esproj
+
+# OS Files
+.DS_Store
+.Trashes
+Thumbs.db
